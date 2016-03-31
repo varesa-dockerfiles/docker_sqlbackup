@@ -6,10 +6,10 @@ if [ -f /root/.ssh/id_rsa ]
 then
 	echo "Creating backups for $date"
 	mkdir $date
-	mysql -u$DB_USER -p$DB_PASSWORD -e 'show databases' | while read dbname
+	mysql -u$DB_USER -p$DB_PASSWORD -h$DB_HOST -e 'show databases' | while read dbname
 	do
 		echo "Dumping database $dbname"
-		mysqldump -u"$DB_USER" -p"$DB_PASSWORD" "$dbname" > "$date/$dbname".sql
+		mysqldump -u"$DB_USER" -p"$DB_PASSWORD" -h$DB_HOST "$dbname" > "$date/$dbname".sql
 	done
 	echo "Copying backups to $TARGET"
 	rsync -va $date $TARGET
