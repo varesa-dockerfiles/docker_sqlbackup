@@ -17,7 +17,10 @@ then
 	rm -rf ./$date
 else
 	echo "Please create SSH keys and copy them to the backup target"
-	ssh-keygen
-	host=$(echo $TARGET | sed "s/\(.*\):.*/\1/")
-	ssh-copy-id $host
+	if [ -t 1 ]
+	then
+		ssh-keygen
+		host=$(echo $TARGET | sed "s/\(.*\):.*/\1/")
+		ssh-copy-id $host
+	fi
 fi
