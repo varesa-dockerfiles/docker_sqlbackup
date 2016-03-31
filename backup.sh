@@ -6,7 +6,7 @@ if [ -f /root/.ssh/id_rsa ]
 then
 	echo "Creating backups for $date"
 	mkdir $date
-	mysql -u$DB_USER -p$DB_PASSWORD -h$DB_HOST -e 'show databases' | while read dbname
+	mysql -u$DB_USER -p$DB_PASSWORD -h$DB_HOST -N -e 'show databases' | while read dbname
 	do
 		echo "Dumping database $dbname"
 		mysqldump -u"$DB_USER" -p"$DB_PASSWORD" -h$DB_HOST "$dbname" > "$date/$dbname".sql
