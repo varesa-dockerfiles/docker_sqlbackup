@@ -2,7 +2,7 @@ FROM registry.esav.fi:5000/centos
 
 MAINTAINER Esa Varemo <esa@kuivanto.fi>
 
-RUN yum install -y mariadb
+RUN yum install -y mariadb openssh rsync
 
 ADD backup.sh /backup.sh
 
