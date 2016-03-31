@@ -18,5 +18,6 @@ then
 else
 	echo "Please create SSH keys and copy them to the backup target"
 	ssh-keygen
-	ssh-copy-id $TARGET
+	host=$(echo $TARGET | sed "s/\(.*\):.*/\1/")
+	ssh-copy-id $host
 fi
